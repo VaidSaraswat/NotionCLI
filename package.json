@@ -1,0 +1,19 @@
+{
+  "name": "notioncli",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "notioncli": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@notionhq/client": "^1.0.4",
+    "chalk": "^4.0.0",
+    "commander": "^9.1.0"
+  }
+}
