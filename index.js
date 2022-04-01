@@ -90,10 +90,3 @@ program.parse();
 // getSpecificPage("d4061b12-7573-42f2-aaf5-e642e45560bf");
 // updateTaskListPage("d4061b12-7573-42f2-aaf5-e642e45560bf");
 // updateSecificPage("93e095bb-41e9-4e52-b3a7-9c04ec74b3f9");
-
-//TODO Figure out how to add task lists
-/*
-notioncli get-tasks -> returns the list of pages in the task lists with various properties ex: Report Due (Nov 2) Status: To Do 
-notioncli create-task -> prompts user for various set of parameters. 1. Task name 2. Due Date (YYYY-MM-DD)
-notioncli update-task -> lists task -> user choose from the list by entering task number -> cli them prompts for which status 1.To Do 2. Doing 3. Done
-*/
