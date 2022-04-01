@@ -34,13 +34,16 @@ async function getTasks() {
     });
     response.results.forEach((page, index) => {
       //If it contains a title then print the task title and date due
-      //   console.log(page.properties);
       if (page.properties.Name.title.length > 0) {
+        const status = page.properties.Status.select.name;
         const taskName = page.properties.Name.title[0].text.content;
         const dueDate = formatDate(page.properties.Due.date.start);
         console.log(
           chalk.red.bold(++index + ": " + taskName) +
-            chalk.green.bold(" [Due: " + dueDate + "]")
+            " " +
+            chalk.blue.bold("[Status: " + status + "]") +
+            " " +
+            chalk.green.bold("[Due: " + dueDate + "]")
         );
       }
     });
