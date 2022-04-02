@@ -8,7 +8,7 @@ async function updateTask() {
   await getTasks();
   let status = ["To Do", "Doing", "Done"];
   //Ask user for which task they want to update and the new status should be
-  var questions = [
+  let questions = [
     {
       type: "input",
       name: "taskNum",
