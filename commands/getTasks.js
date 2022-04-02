@@ -1,27 +1,8 @@
 const { Client } = require("@notionhq/client");
 const chalk = require("chalk");
 const conf = new (require("conf"))();
+const formatDate = require("./util/formatDate");
 
-const formatDate = (date) => {
-  let newDate = new Date(date);
-  const month = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  return `${month[newDate.getMonth()]} ${
-    newDate.getDate() + 1
-  } ${newDate.getFullYear()}`;
-};
 async function getTasks() {
   const notion = new Client({ auth: process.env.NOTION_KEY });
   const databaseId = process.env.NOTION_DATABASE_ID;
