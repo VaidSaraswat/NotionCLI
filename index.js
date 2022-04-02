@@ -1,12 +1,12 @@
 #! /usr/bin/env node
 const { program } = require("commander");
-const getTasks = require("./commands/getTasks");
+const printTasks = require("./commands/printTasks");
 const updateTask = require("./commands/updateTask");
 const createTask = require("./commands/createTask");
 program
   .command("get-tasks")
   .description("Lists all the task in your notion task list")
-  .action(getTasks);
+  .action(printTasks);
 
 program
   .command("update-task")

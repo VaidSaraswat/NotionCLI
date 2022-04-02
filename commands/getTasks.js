@@ -12,16 +12,11 @@ async function getTasks() {
       database_id: databaseId,
     });
     response.results.forEach((page, index) => {
-      //If it contains a title then print the task title and date due
+      //If it contains a title then add it to tasks list
       if (page.properties.Name.title.length > 0) {
         const status = page.properties.Status.select.name;
         const taskName = page.properties.Name.title[0].text.content;
         const dueDate = formatDate(page.properties.Due.date.start);
-        console.log(
-          `${++index}: ${chalk.red.bold(taskName)} ${chalk.blue.bold(
-            `[Status: ${status}]`
-          )} ${chalk.green.bold(`[Due: ${dueDate}]`)}`
-        );
         tasks.push({
           pageId: page.id,
           taskName: taskName,

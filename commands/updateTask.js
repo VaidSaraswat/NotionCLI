@@ -6,30 +6,34 @@ const inquirer = require("inquirer");
 
 async function updateTask() {
   await getTasks();
-  let status = ["To Do", "Doing", "Done"];
-  //Ask user for which task they want to update and the new status should be
+  let tasks = conf.get("tasks");
+  let choices = tasks.map((task, index) => {
+    return {
+      name: `${chalk.red.bold(task.taskName)} ${chalk.blue.bold(
+        `[Status: ${task.status}]`
+      )} ${chalk.green.bold(`[Due: ${task.dueDate}]`)}`,
+      value: index,
+    };
+  });
+
   let questions = [
     {
-      type: "input",
-      name: "taskNum",
-      message: "Enter the task number of which you want to update:",
+      type: "list",
+      name: "taskIndex",
+      message: "Which task do you want to update?",
+      choices: choices,
     },
     {
-      type: "input",
-      name: "statusNum",
-      message: "Enter the new task status [1: To Do 2: Doing 3: Done]:",
+      type: "list",
+      name: "status",
+      message: "What is the new status of the task?",
+      choices: ["To Do", "Doing", "Done"],
     },
   ];
-
   let answers = await inquirer.prompt(questions);
 
-  const taskNum = parseInt(answers.taskNum - 1);
-  const statusNum = parseInt(answers.statusNum - 1);
-
-  let task = conf.get("tasks")[taskNum];
-
   //Update the task
-  await updateTaskStatus(task, status[statusNum]);
+  await updateTaskStatus(tasks[answers.taskIndex], answers.status);
 }
 async function updateTaskStatus(task, newStatus) {
   const notion = new Client({ auth: process.env.NOTION_KEY });
@@ -46,7 +50,7 @@ async function updateTaskStatus(task, newStatus) {
     });
     console.log(
       chalk.red.bold(
-        `Updated status of ${task.taskName} from \'${task.status}\' to \'${newStatus}\'`
+        `Updated status of task \'${task.taskName}\' from \'${task.status}\' to \'${newStatus}\'`
       )
     );
   } catch (e) {
