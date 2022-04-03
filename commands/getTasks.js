@@ -17,12 +17,14 @@ async function getTasks() {
         const status = page.properties.Status.select.name;
         const taskName = page.properties.Name.title[0].text.content;
         const dueDate = formatDate(page.properties.Due.date.start);
-        tasks.push({
-          pageId: page.id,
-          taskName: taskName,
-          status: status,
-          dueDate: dueDate,
-        });
+        if (status !== "Done") {
+          tasks.push({
+            pageId: page.id,
+            taskName: taskName,
+            status: status,
+            dueDate: dueDate,
+          });
+        }
       }
     });
     conf.set("tasks", tasks);
