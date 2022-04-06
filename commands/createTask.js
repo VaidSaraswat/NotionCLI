@@ -4,6 +4,8 @@ const inquirer = require("inquirer");
 const formatDate = require("./util/formatDate");
 
 async function createTask() {
+  inquirer.registerPrompt("date", require("inquirer-date-prompt"));
+
   let questions = [
     {
       type: "input",
@@ -11,13 +13,18 @@ async function createTask() {
       message: "Enter the the name of the new task:",
     },
     {
-      type: "input",
+      type: "date",
       name: "dueDate",
-      message: "Enter the date this task is due (YYYY-MM-DD):",
+      message: "Select the date this task is due (YYYY-MM-DD)",
     },
   ];
 
   let answers = await inquirer.prompt(questions);
+  //Need to set hours 4 hours behind due to offset caused when saving task to notion
+  const newDate = new Date(answers.dueDate);
+  newDate.setHours(newDate.getHours() - 4);
+  answers.dueDate = newDate;
+
   await createPage(answers);
 }
 
@@ -32,8 +39,7 @@ async function createPage(answers) {
         Due: {
           date: {
             start: answers.dueDate,
-            end: null,
-            time_zone: null,
+            time_zone: "America/Toronto",
           },
         },
         Status: {
