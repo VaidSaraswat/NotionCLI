@@ -14,9 +14,9 @@ const formatDate = (date) => {
     "Nov",
     "Dec",
   ];
-  return `${month[newDate.getMonth()]} ${
-    newDate.getDate() + 1
-  } ${newDate.getFullYear()}`;
+  return `${
+    month[newDate.getMonth()]
+  } ${newDate.getDate()} ${newDate.getFullYear()}`;
 };
 
 module.exports = formatDate;
