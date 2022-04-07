@@ -13,7 +13,7 @@ async function getTodos() {
       block_id: pageId,
     });
     response.results.forEach((block) => {
-      if (block.to_do) {
+      if (block.to_do && !block.to_do.checked) {
         blocks.push({ blockId: block.id, toDo: block.to_do });
       }
     });
