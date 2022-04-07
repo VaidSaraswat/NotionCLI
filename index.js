@@ -4,6 +4,7 @@ const printTasks = require("./commands/printTasks");
 const updateTask = require("./commands/updateTask");
 const createTask = require("./commands/createTask");
 const printTodos = require("./commands/printTodos");
+const updateTodos = require("./commands/updateTodo");
 program
   .command("get-tasks")
   .description("Lists all the task in your notion task list")
@@ -23,5 +24,10 @@ program
   .command("get-todos")
   .description("Gets the list of to-do items")
   .action(printTodos);
+
+program
+  .command("update-todo")
+  .description("Updates the todo as done")
+  .action(updateTodos);
 
 program.parse();
